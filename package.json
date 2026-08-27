@@ -1,0 +1,20 @@
+{
+  "name": "flag-snake-game",
+  "version": "1.0.0",
+  "description": "Country Flag Snake Game - 58k+ LOC Full Stack Application",
+  "main": "app.py",
+  "scripts": {
+    "start": "python app.py",
+    "test": "python run_tests.py"
+  },
+  "keywords": [
+    "snake-game",
+    "html5-canvas",
+    "country-flags",
+    "python-flask",
+    "a-star-pathfinding"
+  ],
+  "author": "Srinivas",
+  "license": "UNLICENSED",
+  "private": true
+}
