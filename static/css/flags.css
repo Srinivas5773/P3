@@ -1,0 +1,76 @@
+/* ==========================================================================
+   Flag Themes & Badge Specific Stylesheet
+   ========================================================================== */
+
+/* India Flag Theme Glow & Accents */
+.theme-in {
+    --glow-color: rgba(255, 153, 51, 0.6);
+    --border-color: #ff9933;
+}
+
+/* USA Flag Theme Glow & Accents */
+.theme-us {
+    --glow-color: rgba(178, 34, 52, 0.6);
+    --border-color: #b22234;
+}
+
+/* UK Flag Theme Glow & Accents */
+.theme-uk {
+    --glow-color: rgba(207, 20, 43, 0.6);
+    --border-color: #00247d;
+}
+
+/* Japan Flag Theme Glow & Accents */
+.theme-jp {
+    --glow-color: rgba(188, 0, 45, 0.6);
+    --border-color: #bc002d;
+}
+
+/* Germany Flag Theme Glow & Accents */
+.theme-de {
+    --glow-color: rgba(255, 204, 0, 0.6);
+    --border-color: #ffcc00;
+}
+
+/* Brazil Flag Theme Glow & Accents */
+.theme-br {
+    --glow-color: rgba(0, 156, 59, 0.6);
+    --border-color: #009c3b;
+}
+
+/* France Flag Theme Glow & Accents */
+.theme-fr {
+    --glow-color: rgba(0, 35, 149, 0.6);
+    --border-color: #002395;
+}
+
+/* Australia Flag Theme Glow & Accents */
+.theme-au {
+    --glow-color: rgba(0, 0, 133, 0.6);
+    --border-color: #000085;
+}
+
+/* Canada Flag Theme Glow & Accents */
+.theme-ca {
+    --glow-color: rgba(255, 0, 0, 0.6);
+    --border-color: #ff0000;
+}
+
+/* Italy Flag Theme Glow & Accents */
+.theme-it {
+    --glow-color: rgba(0, 146, 70, 0.6);
+    --border-color: #009246;
+}
+
+.flag-badge {
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    padding: 0.2rem 0.6rem;
+    border-radius: 8px;
+    transition: all 0.3s ease;
+}
+
+.flag-badge.active-theme {
+    border-color: var(--border-color);
+    box-shadow: 0 0 10px var(--glow-color);
+}
