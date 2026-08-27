@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐍 Country Flag Snake - Flag Pattern Edition</title>
+    <!-- Fonts & Icons -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Press+Start+2P&family=Outfit:wght@400;600;700;800&display=swap" rel="stylesheet">
+    <!-- CSS Stylesheets -->
+    <link rel="stylesheet" href="/static/css/style.css">
+    <link rel="stylesheet" href="/static/css/flags.css">
+</head>
+<body>
+    <div class="app-container">
+        <!-- Header Bar -->
+        <header class="game-header">
+            <div class="logo-group">
+                <span class="logo-icon">🐍</span>
+                <div class="title-text">
+                    <h1>FLAG SNAKE</h1>
+                    <p class="subtitle">Eat Food • Grow Bigger • Represent Your Country 🚩</p>
+                </div>
+            </div>
+
+            <!-- Country Selection Dropdown -->
+            <div class="country-select-wrapper">
+                <label for="countrySelect" class="select-label">CHOOSE NATION:</label>
+                <div class="custom-select">
+                    <select id="countrySelect" class="country-dropdown">
+                        <!-- Populated dynamically via API & config -->
+                        <option value="IN" selected>🇮🇳 India (Saffron, White, Green & Chakra)</option>
+                        <option value="US">🇺🇸 United States (Red, White & Star Blue)</option>
+                        <option value="UK">🇬🇧 United Kingdom (Union Jack Tricolor)</option>
+                        <option value="JP">🇯🇵 Japan (Snow White & Sun Red)</option>
+                        <option value="DE">🇩🇪 Germany (Black, Red & Gold)</option>
+                        <option value="BR">🇧🇷 Brazil (Verde & Yellow Diamond)</option>
+                        <option value="FR">🇫🇷 France (Blue, White & Red)</option>
+                        <option value="AU">🇦🇺 Australia (Navy & Southern Cross Stars)</option>
+                        <option value="CA">🇨🇦 Canada (Red, White & Maple Leaf)</option>
+                        <option value="IT">🇮🇹 Italy (Green, White & Red)</option>
+                    </select>
+                </div>
+            </div>
+        </header>
+
+        <!-- Main Workspace: Stats & Canvas -->
+        <main class="game-main">
+            <!-- Stats Dashboard -->
+            <div class="stats-bar">
+                <div class="stat-card">
+                    <span class="stat-label">SCORE</span>
+                    <span id="scoreDisplay" class="stat-value">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">HIGH SCORE</span>
+                    <span id="highScoreDisplay" class="stat-value">0</span>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">CURRENT NATION</span>
+                    <div id="flagBadge" class="flag-badge">
+                        <span id="flagEmoji">🇮🇳</span>
+                        <span id="flagName">India</span>
+                    </div>
+                </div>
+                <div class="stat-card">
+                    <span class="stat-label">NATIONAL DISH</span>
+                    <span id="foodItemDisplay" class="stat-value food-text">Samosa 🥟</span>
+                </div>
+                <div class="action-buttons">
+                    <button id="audioToggleBtn" class="btn btn-secondary" title="Toggle Sound Effects">🔊 Sound ON</button>
+                    <button id="leaderboardBtn" class="btn btn-secondary">🏆 Top Scores</button>
+                </div>
+            </div>
+
+            <!-- Game Canvas Container -->
+            <div class="canvas-container">
+                <canvas id="gameCanvas" width="800" height="600"></canvas>
+
+                <!-- Overlay Screens -->
+                <div id="overlayStart" class="canvas-overlay active">
+                    <div class="overlay-content">
+                        <div class="flag-banner" id="startBanner">🇮🇳</div>
+                        <h2>READY TO PLAY?</h2>
+                        <p class="overlay-desc">Use <strong>Arrow Keys / WASD</strong> to control your flag-themed snake.</p>
+                        <button id="startBtn" class="btn btn-primary btn-large">START GAME</button>
+                    </div>
+                </div>
+
+                <div id="overlayPause" class="canvas-overlay hidden">
+                    <div class="overlay-content">
+                        <h2>GAME PAUSED</h2>
+                        <p>Press <strong>SPACE</strong> or Click to Resume</p>
+                        <button id="resumeBtn" class="btn btn-primary">RESUME</button>
+                    </div>
+                </div>
+
+                <div id="overlayGameOver" class="canvas-overlay hidden">
+                    <div class="overlay-content">
+                        <h2 class="gameover-title">GAME OVER!</h2>
+                        <div class="final-score-box">
+                            <p>FINAL SCORE: <span id="finalScore">0</span></p>
+                            <p class="nation-played">Nation: <span id="finalFlag">🇮🇳</span> <span id="finalNation">India</span></p>
+                        </div>
+                        
+                        <!-- High Score Submission Form -->
+                        <div id="submitScoreBox" class="submit-score-box">
+                            <input type="text" id="playerNameInput" placeholder="Enter Your Name..." maxlength="15" />
+                            <button id="saveScoreBtn" class="btn btn-accent">SAVE SCORE</button>
+                        </div>
+
+                        <div class="overlay-actions">
+                            <button id="restartBtn" class="btn btn-primary btn-large">PLAY AGAIN 🔄</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Mobile Touch D-Pad -->
+            <div class="touch-controls">
+                <button class="dpad-btn up" id="dpadUp">▲</button>
+                <div class="dpad-middle">
+                    <button class="dpad-btn left" id="dpadLeft">◄</button>
+                    <button class="dpad-btn pause" id="dpadPause">⏸</button>
+                    <button class="dpad-btn right" id="dpadRight">►</button>
+                </div>
+                <button class="dpad-btn down" id="dpadDown">▼</button>
+            </div>
+        </main>
+
+        <!-- Footer -->
+        <footer class="game-footer">
+            <p>Controls: <kbd>W</kbd><kbd>A</kbd><kbd>S</kbd><kbd>D</kbd> or <kbd>↑</kbd><kbd>←</kbd><kbd>↓</kbd><kbd>→</kbd> | Pause: <kbd>SPACE</kbd></p>
+        </footer>
+    </div>
+
+    <!-- Leaderboard Modal -->
+    <div id="leaderboardModal" class="modal-overlay hidden">
+        <div class="modal-card">
+            <div class="modal-header">
+                <h2>🏆 GLOBAL LEADERBOARD</h2>
+                <button id="closeModalBtn" class="close-btn">&times;</button>
+            </div>
+            <div class="modal-body">
+                <table class="leaderboard-table">
+                    <thead>
+                        <tr>
+                            <th>#</th>
+                            <th>Player</th>
+                            <th>Nation</th>
+                            <th>Score</th>
+                            <th>Date</th>
+                        </tr>
+                    </thead>
+                    <tbody id="leaderboardTbody">
+                        <!-- Populated by JS -->
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+
+    <!-- JavaScript Game Logic Scripts -->
+    <script src="/static/js/config.js"></script>
+    <script src="/static/js/audio.js"></script>
+    <script src="/static/js/flags.js"></script>
+    <script src="/static/js/particles.js"></script>
+    <script src="/static/js/food.js"></script>
+    <script src="/static/js/snake.js"></script>
+    <script src="/static/js/leaderboard.js"></script>
+    <script src="/static/js/game.js"></script>
+    <script src="/static/js/main.js"></script>
+</body>
+</html>
