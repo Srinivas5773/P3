@@ -1,0 +1,14 @@
+/* Skin Editor Modal Styling */
+.skin-editor-container {
+    background: #1e293b;
+    border: 2px solid #3b82f6;
+    border-radius: 12px;
+    padding: 1.5rem;
+    color: #ffffff;
+}
+.color-picker-group {
+    display: flex;
+    gap: 1rem;
+    align-items: center;
+    margin-bottom: 0.75rem;
+}
