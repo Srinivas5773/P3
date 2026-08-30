@@ -1,11 +1,2 @@
-/* Audio Jukebox Controls Styling */
-.jukebox-panel {
-    background: #0f172a;
-    border: 1px solid #fbbf24;
-    border-radius: 10px;
-    padding: 1rem;
-}
-.track-item.active {
-    background: #1e293b;
-    color: #fbbf24;
-}
+/* Jukebox CSS */
+.jukebox-panel { border: 1px solid gold; }
